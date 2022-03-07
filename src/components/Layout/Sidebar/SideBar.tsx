@@ -16,10 +16,14 @@ function SideBar() {
     dispatch(toggleSideBar());
   };
   return (
-    <aside className="px-3 py-2 max-w-[300px] bg-gray-100 h-screen flex flex-col">
+    <aside
+      className={`transition-all duration-300 overflow-hidden px-3 py-2  bg-gray-100 ${
+        isSideBarOpen ? "w-[300px]" : "w-[50px]"
+      } h-screen flex flex-col`}
+    >
       <div className="flex items-center gap-6">
         <BiArrowBack />
-        <p className="text-xs">Groove Music</p>
+        {isSideBarOpen && <p className="text-xs min-w-[100px]">Groove Music</p>}
       </div>
       <Divider />
       <VscMenu onClick={toggleSidebar} />
@@ -35,10 +39,12 @@ function SideBar() {
       </ul>
       <hr className="bg-gray-300" />
       <ul className="flex-1">
-        <div className="flex items-center">
-          <div className="flex-1">
-            <MenuItem title="Playlists" icon={<IoIosAlbums />} />
-          </div>
+        <div className="flex items-center min-h-[52px]">
+          {isSideBarOpen && (
+            <div className="flex-1">
+              <MenuItem title="Playlists" icon={<IoIosAlbums />} />
+            </div>
+          )}
           <GrAdd />
         </div>
       </ul>
